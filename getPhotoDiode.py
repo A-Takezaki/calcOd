@@ -33,6 +33,7 @@ def getPhotodiodeSignal(measurementTime):
     print(df)
     max = df['Volt'].max()
     print("max:",max)
+    return max
 
 def turnOnLaser(PIN_LASER,measurementTime):
     # LASERピン設定
@@ -48,9 +49,11 @@ def turnOnLaser(PIN_LASER,measurementTime):
     
     return
 
-
-# LEDのピン設定
-PIN_LASER = 21
-# 何秒計測するか
-measurementTime = 10
-turnOnLaser(PIN_LASER,measurementTime)
+def outputPhotodiodeSignal():
+    # LEDのピン設定
+    PIN_LASER = 21
+    # 何秒計測するか
+    measurementTime = 10
+    volt = turnOnLaser(PIN_LASER,measurementTime)
+    # voltをcsvに書き込み
+    

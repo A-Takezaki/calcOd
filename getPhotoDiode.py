@@ -43,17 +43,20 @@ def turnOnLaser(PIN_LASER,measurementTime):
     # LEDを点灯し、フォトダイオードで計測する
     print("LED ON")
     led.on()
-    getPhotodiodeSignal(measurementTime)
+    volt = getPhotodiodeSignal(measurementTime)
     led.off()
     print("LED OFF")
     
-    return
+    return volt
 
 def outputPhotodiodeSignal():
     # LEDのピン設定
     PIN_LASER = 21
     # 何秒計測するか
-    measurementTime = 10
+    measurementTime = 3
     volt = turnOnLaser(PIN_LASER,measurementTime)
+    print("outputPhotodiodeSignal",volt)
     # voltをcsvに書き込み
-    
+    return volt
+
+# outputPhotodiodeSignal()

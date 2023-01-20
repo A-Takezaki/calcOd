@@ -7,6 +7,14 @@ from gpiozero import LED
 from gpiozero.pins.pigpio import PiGPIOFactory
 from time import sleep
 
+# LEDのピン設定
+PIN_LASER = 21
+# 何秒計測するか
+measurementTime = 3
+# LASERピン設定
+factory = PiGPIOFactory()
+led = LED(PIN_LASER, pin_factory=factory)
+
 def getPhotodiodeSignal(measurementTime):
     SPI_CE = 0
     SPI_SPEED = 1000000
@@ -35,10 +43,10 @@ def getPhotodiodeSignal(measurementTime):
     print("max:",max)
     return max
 
-def turnOnLaser(PIN_LASER,measurementTime):
-    # LASERピン設定
-    factory = PiGPIOFactory()
-    led = LED(PIN_LASER, pin_factory=factory)
+def turnOnLaser(led,measurementTime):
+    # # LASERピン設定
+    # factory = PiGPIOFactory()
+    # led = LED(PIN_LASER, pin_factory=factory)
 
     # LEDを点灯し、フォトダイオードで計測する
     print("LED ON")
@@ -49,12 +57,9 @@ def turnOnLaser(PIN_LASER,measurementTime):
     
     return volt
 
+
 def outputPhotodiodeSignal():
-    # LEDのピン設定
-    PIN_LASER = 21
-    # 何秒計測するか
-    measurementTime = 3
-    volt = turnOnLaser(PIN_LASER,measurementTime)
+    volt = turnOnLaser(led,measurementTime)
     print("outputPhotodiodeSignal",volt)
     # voltをcsvに書き込み
     return volt

@@ -22,9 +22,8 @@ pi@raspberrypi:~ $ python3 calcOd/app.py
  * Debugger PIN: 121-474-916
 ```
 ## 使用する電子回路
-![ブレッドボード図](https://user-images.githubusercontent.com/75236064/213842254-f8aa3dae-f33b-4fdf-8cb3-b7959118c38e.png)
-※2023/01/21現在
-※分圧回路実装予定
+![ブレッドボード図](https://user-images.githubusercontent.com/75236064/213898889-d842e9e0-d016-4ed8-ab57-02895ca8b358.png)
+※2023/01/22現在
 
 
 ## Webインターフェース使用方法

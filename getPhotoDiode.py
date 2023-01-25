@@ -2,6 +2,7 @@ import wiringpi as pi
 import time
 import mcp_adc
 import csv
+import os
 import pandas as pd
 from gpiozero import LED
 from gpiozero.pins.pigpio import PiGPIOFactory
@@ -43,7 +44,7 @@ def getPhotodiodeSignal(measurementTime):
     print("max:",max)
     return max
 
-def turnOnLaser(led,measurementTime):
+def turnOnLaserAndGetMaxVolt(led,measurementTime):
     # # LASERピン設定
     # factory = PiGPIOFactory()
     # led = LED(PIN_LASER, pin_factory=factory)
@@ -59,9 +60,18 @@ def turnOnLaser(led,measurementTime):
 
 
 def outputPhotodiodeSignal():
-    volt = turnOnLaser(led,measurementTime)
+    volt = turnOnLaserAndGetMaxVolt(led,measurementTime)
     print("outputPhotodiodeSignal",volt)
     # voltをcsvに書き込み
+    append_volt_to_csv(volt)
     return volt
 
-# outputPhotodiodeSignal()
+
+def append_volt_to_csv(volt):
+    file_exists = os.path.isfile('data.csv')
+    with open('data.csv', mode='a') as file:
+        fieldnames = ['volt']
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        if not file_exists:
+            writer.writeheader()
+        writer.writerow({'volt': volt})
